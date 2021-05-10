@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="MLPDR",
+    name="MLPD",
     version="0.1.0",
     author="masaaki-kotera",
     author_email="maskot1977@gmail.com",
     description="PyTorch MLP with Dropout",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/maskot1977/MLPDR/",
+    url="https://github.com/maskot1977/MLPD/",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
