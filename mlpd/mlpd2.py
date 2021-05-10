@@ -14,6 +14,9 @@ class MLPDR2(nn.Module):
         self.relu = nn.ReLU()
         self.d1 = nn.Dropout(p_dropout1)
         self.d2 = nn.Dropout(p_dropout2)
+        nn.init.xavier_normal_(self.l1.weight)
+        nn.init.xavier_normal_(self.l2.weight)
+        nn.init.xavier_normal_(self.l3.weight)
 
     def forward(self, x):
         x = self.relu(self.l1(x))
@@ -70,7 +73,7 @@ class Objective:
 
         self.train_loss_history.append(total_loss)
 
-        test_loss = criterion(model(self.x_test), self.y_test)
+        test_loss = criterion(model(self.x_train), self.y_train)
         self.test_loss_history.append(loss.detach().numpy())
 
         if self.best_score is None or self.best_score > loss:
