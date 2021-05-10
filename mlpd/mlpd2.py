@@ -67,16 +67,23 @@ class Objective:
                 optimizer.zero_grad()
                 y_pred = model(x)
                 loss = criterion(y_pred, y)
+                if torch.isnan(loss):
+                    break
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item()
+
+            if torch.isnan(total_loss):
+                break
 
         self.train_loss_history.append(total_loss)
 
         test_loss = criterion(model(self.x_train), self.y_train)
         self.test_loss_history.append(loss.detach().numpy())
 
-        if self.best_score is None or self.best_score > loss:
+        if torch.isnan(total_loss):
+            pass
+        elif self.best_score is None or self.best_score > loss:
             self.best_score = loss
             self.best_model = model
             print("n_trial=", self.n_trial)
