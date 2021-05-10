@@ -13,9 +13,6 @@ class MLPDR(nn.Module):
 
     def forward(self, x):
         x = self.relu(self.l1(x))
-        # print(x)
         x = self.dropout(x)
-        # print(x)
         x = self.l2(x)
-        print(x)
         return x
