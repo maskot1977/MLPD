@@ -19,13 +19,15 @@ class MLPDR(nn.Module):
 
 
 class Objective:
-    def __init__(self):
-        self.best_model = None
-        self.best_score = None
+    def __init__(self, x_train, y_train):
+        self.x_train = x_train
+        self.y_train = y_train
         self.n_h1 = [1, 500]
         self.lr = [1e-10, 1e-1]
         self.p_dropout = [0, 1]
         self.n_epoch = [1, 500]
+        self.best_model = None
+        self.best_score = None
         self.train_loss_history = []
         self.test_loss_history = []
         self.n_trial = 0
@@ -39,7 +41,7 @@ class Objective:
             trial.suggest_uniform("p_dropout", self.p_dropout[0], self.p_dropout[1]),
         )
 
-        model = MLPDR(x_train.shape[1], n_h1, y_train.shape[1], p_dropout)
+        model = MLPDR(self.x_train.shape[1], n_h1, self.y_train.shape[1], p_dropout)
         criterion = torch.nn.MSELoss()
         optimizer = torch.optim.SGD(model.parameters(), lr=lr)
 
