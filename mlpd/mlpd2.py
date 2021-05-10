@@ -58,7 +58,7 @@ class Objective:
 
         for epoch in range(n_epoch):
             total_loss = 0
-            for x, y in train_loader:
+            for x, y in self.train_loader:
                 x = Variable(x)
                 y = Variable(y)
                 optimizer.zero_grad()
