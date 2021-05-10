@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from torch.autograd import Variable
 from torch.utils.data import DataLoader, TensorDataset
 
 
@@ -24,7 +25,9 @@ class Objective:
     def __init__(self, x_train, y_train):
         self.x_train = x_train
         self.y_train = y_train
-        self.train_loader = DataLoader(TensorDataset(x_train, y_train), batch_size=100, shuffle=True)
+        self.train_loader = DataLoader(
+            TensorDataset(x_train, y_train), batch_size=100, shuffle=True
+        )
         self.n_h1 = [1, 500]
         self.lr = [1e-10, 1e-1]
         self.p_dropout = [0, 1]
