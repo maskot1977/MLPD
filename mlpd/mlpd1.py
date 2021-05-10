@@ -4,7 +4,7 @@ from torch.autograd import Variable
 from torch.utils.data import DataLoader, TensorDataset
 
 
-class MLPDR(nn.Module):
+class MLPDR1(nn.Module):
     def __init__(self, n_input, n_hidden, n_output, p_dropout):
         super().__init__()
         self.l1 = nn.Linear(n_input, n_hidden)
@@ -21,7 +21,7 @@ class MLPDR(nn.Module):
         return x
 
 
-class Objective:
+class MLPDR1_Objective:
     def __init__(self, x_train, y_train):
         self.x_train = x_train
         self.y_train = y_train
@@ -47,7 +47,7 @@ class Objective:
             trial.suggest_uniform("p_dropout", self.p_dropout[0], self.p_dropout[1]),
         )
 
-        model = MLPDR(self.x_train.shape[1], n_h1, self.y_train.shape[1], p_dropout)
+        model = MLPDR1(self.x_train.shape[1], n_h1, self.y_train.shape[1], p_dropout)
         criterion = torch.nn.MSELoss()
         optimizer = torch.optim.SGD(model.parameters(), lr=lr)
 
