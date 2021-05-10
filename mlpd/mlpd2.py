@@ -52,7 +52,7 @@ class Objective:
         p_dropout1,  = trial.suggest_uniform('p_dropout1', self.p_dropout1[0], self.p_dropout1[1]),
         p_dropout2,  = trial.suggest_uniform('p_dropout2', self.p_dropout2[0], self.p_dropout2[1]),
 
-        model = MLPDR2(x_train.shape[1], n_h1, n_h2, y_train.shape[1], p_dropout1, p_dropout2)
+        model = MLPDR2(self.x_train.shape[1], n_h1, n_h2, self.y_train.shape[1], p_dropout1, p_dropout2)
         criterion = torch.nn.MSELoss()
         optimizer = torch.optim.SGD(model.parameters(), lr=lr)
 
