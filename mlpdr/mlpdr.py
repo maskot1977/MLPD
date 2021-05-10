@@ -65,7 +65,7 @@ class Objective:
 
         self.train_loss_history.append(total_loss)
 
-        test_loss = criterion(model(self.x_test), self.y_test)
+        test_loss = criterion(model(self.x_train), self.y_train)
         self.test_loss_history.append(loss.detach().numpy())
 
         if self.best_score is None or self.best_score > loss:
