@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from torch.utils.data import DataLoader, TensorDataset
 
 
 class MLPDR(nn.Module):
@@ -23,6 +24,7 @@ class Objective:
     def __init__(self, x_train, y_train):
         self.x_train = x_train
         self.y_train = y_train
+        self.train_loader = DataLoader(TensorDataset(x_train, y_train), batch_size=100, shuffle=True)
         self.n_h1 = [1, 500]
         self.lr = [1e-10, 1e-1]
         self.p_dropout = [0, 1]
@@ -48,7 +50,7 @@ class Objective:
 
         for epoch in range(n_epoch):
             total_loss = 0
-            for x, y in train_loader:
+            for x, y in self.train_loader:
                 x = Variable(x)
                 y = Variable(y)
                 optimizer.zero_grad()
