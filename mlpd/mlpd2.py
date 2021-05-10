@@ -20,16 +20,21 @@ class MLPDR2(nn.Module):
         return x
 
 
-class MLPDR2_Objective:
-    def __init__(self):
-        self.best_model = None
-        self.best_score = None
+class Objective:
+    def __init__(self, x_train, y_train):
+        self.x_train = x_train
+        self.y_train = y_train
+        self.train_loader = DataLoader(
+            TensorDataset(x_train, y_train), batch_size=100, shuffle=True
+        )
         self.n_h1 = [1, 500]
         self.n_h2 = [1, 500]
         self.lr = [1e-10, 1e-1]
         self.p_dropout1 = [0, 0.99]
         self.p_dropout2 = [0, 0.99]
         self.n_epoch = [1, 500]
+        self.best_model = None
+        self.best_score = None
         self.train_loss_history = []
         self.test_loss_history = []
         self.n_trial = 0

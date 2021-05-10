@@ -21,7 +21,7 @@ class MLPDR1(nn.Module):
         return x
 
 
-class MLPDR1_Objective:
+class Objective:
     def __init__(self, x_train, y_train):
         self.x_train = x_train
         self.y_train = y_train
