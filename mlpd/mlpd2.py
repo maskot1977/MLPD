@@ -73,15 +73,15 @@ class Objective:
                 optimizer.step()
                 total_loss += loss.item()
 
-            if torch.isnan(total_loss):
+            if torch.isnan(loss):
                 break
 
-        self.train_loss_history.append(total_loss)
+        self.train_loss_history.append(loss)
 
         test_loss = criterion(model(self.x_train), self.y_train)
         self.test_loss_history.append(loss.detach().numpy())
 
-        if torch.isnan(total_loss):
+        if torch.isnan(loss):
             pass
         elif self.best_score is None or self.best_score > loss:
             self.best_score = loss
